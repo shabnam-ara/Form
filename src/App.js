@@ -1,10 +1,11 @@
 import React from "react";
-import ResponsiveForm from "./Login";
+import Login from "./Login";
 
 function App() {
   return (
     <div className="App">
-      <ResponsiveForm />
+      
+      <Login />
     </div>
   );
 }

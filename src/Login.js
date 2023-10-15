@@ -3,8 +3,11 @@ import style from './Login.module.css';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import Avatar from '@mui/material/Avatar';
-// import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
+import Input from '@mui/material/Input';
+import LoginIcon from '@mui/icons-material/Login';
 
 function Login() {
   const [user] = useState(null);
@@ -16,6 +19,7 @@ function Login() {
   const [selectedDropdown1, setSelectedDropdown1] = useState('Option 1');
   const [selectedDropdown2, setSelectedDropdown2] = useState('Option A');
   const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -81,35 +85,36 @@ function Login() {
   };
 
   return (
-    <>
     <div className={style.main}>
       <div className={style.Leftside}>
-      <div className={style.left}>
-      <h1>
-      Manage Your Money <span className={style.addSpace}>Anywhere</span>
-    </h1>
-    <h5>View all the analytics and grow your business from
-      <span className={style.addSpace}> Anywhere !</span>
-    </h5>
-
-    <div className='box-1'>
-        <p>
-          This analytics platform is a game-changer! It's easy to use, provides valuable insights, and has helped me make smarter business decisions.
-          <Avatar alt="Travis Howard" src="https://tse3.mm.bing.net/th?id=OIP.Crz5ALkGjYOXyy805pM7WAHaH1&pid=Api&P=0&h=220" /> 
-          <span>John Deo</span>, founder, Syspihus Ventures
-        </p>
+        <div className={style.left}>
+          <h1>
+            Manage Your Money <span className={style.addSpace}>Anywhere</span>
+          </h1>
+          <h5>
+            View all the analytics and grow your business from
+            <span className={style.addSpace}> Anywhere!</span>
+          </h5>
+          <div className={style.Box}>
+  
+            <p>
+              This analytics platform is a game-changer! It's easy to use, provides valuable insights, and has helped me make smarter business decisions.
+           
+              <Avatar alt="Travis Howard" src="https://tse3.mm.bing.net/th?id=OIP.Crz5ALkGjYOXyy805pM7WAHaH1&pid=Api&P=0&h=220" />
+            <h5>Casey Bachmeyer</h5>
+            <h5>Founder, Sisyphus Ventures</h5>
+            </p>
+           
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-     
       <div className={style.right}>
         <div className={style.signin}>
           <h4>Create an account</h4>
         </div>
         <div className={style.btnmain}>
           {!user ? (
-           <button className={style.gbtn}><StorefrontIcon /> Merchant</button>
-         
+            <button className={style.gbtn}><StorefrontIcon /> Merchant</button>
           ) : (
             <button className={style.gbtn}>Agent</button>
           )}
@@ -126,17 +131,15 @@ function Login() {
           />
           {errors.firstName && <div className={style.errorMessage}>{errors.firstName}</div>}
           <select
-  name="dropdown1"
-  className={`${style.input} ${errors.dropdown1 ? style.error : ''}`}
-  value={selectedDropdown1}
-  onChange={handleDropdown1Change}
->
-  <option value="Option 1">Where is your company based</option>
-  <option value="Option 2">Option 2</option>
-  <option value="Option 3">Option 3</option>
-</select>
-
-
+            name="dropdown1"
+            className={`${style.input} ${errors.dropdown1 ? style.error : ''}`}
+            value={selectedDropdown1}
+            onChange={handleDropdown1Change}
+          >
+            <option value="Option 1">Where is your company based</option>
+            <option value="Option 2">Option 2</option>
+            <option value="Option 3">Option 3</option>
+          </select>
           <input
             type="email"
             name="email"
@@ -146,19 +149,16 @@ function Login() {
             onChange={handleInputChange}
           />
           {errors.email && <div className={style.errorMessage}>{errors.email}</div>}
-
           <select
-  name="dropdown2"
-  className={`${style.input} ${errors.dropdown2 ? style.error : ''}`}
-  value={selectedDropdown2}
-  onChange={handleDropdown2Change}
->
-  <option value="Option A">Please Select as an Industry</option>
-  <option value="Option B">Option B</option>
-  <option value="Option C">Option C</option>
-</select>
-
-
+            name="dropdown2"
+            className={`${style.input} ${errors.dropdown2 ? style.error : ''}`}
+            value={selectedDropdown2}
+            onChange={handleDropdown2Change}
+          >
+            <option value="Option A">Please Select an Industry</option>
+            <option value="Option B">Option B</option>
+            <option value="Option C">Option C</option>
+          </select>
           <input
             type="text"
             name="phoneNumber"
@@ -167,19 +167,30 @@ function Login() {
             value={user ? user.phoneNumber : phoneNumber}
             onChange={handleInputChange}
           />
-          {errors.phoneNumber && <div className={style.errorMessage}>{errors.phoneNumber}</div>}
-
-          <input
-            type="password"
+          <Input
+            type={showPassword ? 'text' : 'password'}
             name="password"
             placeholder="Password"
             className={`${style.input} ${errors.password ? style.error : ''}`}
             value={user ? user.password : password}
             onChange={handleInputChange}
+            endAdornment={
+              <InputAdornment position="end">
+                {showPassword ? (
+                  <VisibilityIcon
+                    onClick={() => setShowPassword(false)}
+                    style={{ cursor: 'pointer' }}
+                  />
+                ) : (
+                  <VisibilityOffIcon
+                    onClick={() => setShowPassword(true)}
+                    style={{ cursor: 'pointer' }}
+                  />
+                )}
+              </InputAdornment>
+            }
           />
           {errors.password && <div className={style.errorMessage}>{errors.password}</div>}
-          
-          
           <label>
             <input
               type="checkbox"
@@ -190,20 +201,15 @@ function Login() {
             I accept the privacy policy
           </label>
           {errors.agreed && <div className={style.errorMessage}>{errors.agreed}</div>}
-
           <button className={style.sbtn} onClick={handleSubmit}>
-            {'Create an Account'}
+            Create an Account
           </button>
         </div>
         <div className={style.signin}>
-  <p>Already have an account ? Log In</p>
-</div>
+          <p>Already have an account?  <LoginIcon/>Log In</p>
+        </div>
       </div>
-     
     </div>
-   
-    </>
-    
   );
 }
 
