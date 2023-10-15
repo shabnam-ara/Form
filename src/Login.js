@@ -101,8 +101,8 @@ function Login() {
               This analytics platform is a game-changer! It's easy to use, provides valuable insights, and has helped me make smarter business decisions.
            
               <Avatar alt="Travis Howard" src="https://tse3.mm.bing.net/th?id=OIP.Crz5ALkGjYOXyy805pM7WAHaH1&pid=Api&P=0&h=220" />
-            <h5>Casey Bachmeyer</h5>
-            <h5>Founder, Sisyphus Ventures</h5>
+            <h6>Casey Bachmeyer</h6>
+            <h6>Founder, Sisyphus Ventures</h6>
             </p>
            
           </div>
